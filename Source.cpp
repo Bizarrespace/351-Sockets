@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
+#include <windows.h>
+
 
 // Link with ws2_32.lib
 #pragma comment(lib, "Ws2_32.lib")
@@ -54,6 +56,10 @@ int main()
 
 
     while (message != "quit") {
+        std::cout << "=========================\n";
+        std::cout << "      UDP Client App\n";
+        std::cout << "=========================\n\n";
+        std::cout << "Client(Type quit to exit)\n";
         std::getline(std::cin, message);
         if (message == "quit") {
             break;
@@ -73,8 +79,11 @@ int main()
         //Receive from and print out what was sent
         recvfrom(RecvSocket,
             RecvBuf, BufLen, 0, (SOCKADDR*)&sender, &SenderAddrSize);
+        std::cout << "\n\nServer:\n";
+        std::cout << "\033[1;32m" << RecvBuf << "\033[0m\n\n";
+        Sleep(2500);
+        system("cls");
 
-        std::cout << std::endl << RecvBuf << std::endl << std::endl;
     }
 
     //---------------------------------------------
